@@ -15,6 +15,13 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Gradle의 developmentOnly는 개발환경에만 적용되는 설정이다. 즉, 운영환경에 배포되는 jar, war 파일에는 developmentOnly로 설치된 라이브러리는 제외된다.
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    // 롬복 라이브러리
+    // compileOnly : 해당 라이브러리가 컴파일 단계에서만 필요한 경우에 사용한다.
+    compileOnly 'org.projectlombok:lombok'
+    // annotationProcessor : 컴파일 단계에서 어노테이션을 분석하고 처리하기 위해 사용한다.
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
