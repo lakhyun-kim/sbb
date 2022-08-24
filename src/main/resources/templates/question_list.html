@@ -5,35 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<!--/*
-    ● 자주 사용하는 타임리프의 속성
-    1. 분기문 속성
-    th:if="${question != null}"
-    위의 경우 question 객체가 null 이 아닌 경우에 해당 엘리먼트가 표시된다.
-
-    2. 반복문 속성
-    th:each="question : ${questionList}"
-    th:each="question, loop : ${questionList}"
-
-    추가한 loop 객체를 이용하여 루프 내에서 다음과 같은 속성을 사용할수 있다.
-
-    loop.index - 반복 순서, 0부터 1씩 증가
-    loop.count - 반복 순서, 1부터 1씩 증가
-    loop.size - 반복 객체의 요소 갯수 (예: questionList의 요소 갯수)
-    loop.first - 루프의 첫번째 순서인 경우 true
-    loop.last - 루프의 마지막 순서인 경우 true
-    loop.odd - 루프의 홀수번째 순서인 경우 true
-    loop.even - 루프의 짝수번째 순서인 경우 true
-    loop.current - 현재 대입된 객체 (예: 위의 경우 question과 동일)
-
-    3. 텍스트 속성
-    th:text="${question.subject}"
-
-    텍스트는 th:text 속성 대신에 다음처럼 대괄호를 사용하여 값을 직접 출력할수 있다.
-
-    [[${question.subject}]]
-    [[${question.createDate}]]
-*/-->
     <table>
         <thead>
             <tr>
@@ -43,10 +14,42 @@
         </thead>
         <tbody>
             <tr th:each="question : ${questionList}">
-                <td th:text="${question.subject}"></td>
+                <td>
+                    <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}">
+                    </a>
+                </td>
                 <td th:text="${question.createDate}"></td>
             </tr>
         </tbody>
     </table>
+    <!--/*
+        ● 자주 사용하는 타임리프의 속성
+        1. 분기문 속성
+        th:if="${question != null}"
+        위의 경우 question 객체가 null 이 아닌 경우에 해당 엘리먼트가 표시된다.
+
+        2. 반복문 속성
+        th:each="question : ${questionList}"
+        th:each="question, loop : ${questionList}"
+
+        추가한 loop 객체를 이용하여 루프 내에서 다음과 같은 속성을 사용할수 있다.
+
+        loop.index - 반복 순서, 0부터 1씩 증가
+        loop.count - 반복 순서, 1부터 1씩 증가
+        loop.size - 반복 객체의 요소 갯수 (예: questionList의 요소 갯수)
+        loop.first - 루프의 첫번째 순서인 경우 true
+        loop.last - 루프의 마지막 순서인 경우 true
+        loop.odd - 루프의 홀수번째 순서인 경우 true
+        loop.even - 루프의 짝수번째 순서인 경우 true
+        loop.current - 현재 대입된 객체 (예: 위의 경우 question과 동일)
+
+        3. 텍스트 속성
+        th:text="${question.subject}"
+
+        텍스트는 th:text 속성 대신에 다음처럼 대괄호를 사용하여 값을 직접 출력할수 있다.
+
+        [[${question.subject}]]
+        [[${question.createDate}]]
+    */-->
 </body>
 </html>
