@@ -13,7 +13,7 @@ layout:fragment="content" : 부모 템플릿의 위 부분을 자식 템플릿�
             </tr>
             </thead>
             <tbody>
-            <tr th:each="question, loop : ${questionList}">
+            <tr th:each="question, loop : ${paging}">
                 <td th:text="${loop.count}"></td>
                 <td>
                     <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}">
@@ -23,6 +23,25 @@ layout:fragment="content" : 부모 템플릿의 위 부분을 자식 템플릿�
             </tr>
             </tbody>
         </table>
+        <!-- 페이징처리 시작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious()} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number - 1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}" th:if="${page >= paging.number - 5 and page <= paging.number + 5}" th:classappend="${page == paging.number} ? 'active'" class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext()} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number + 1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 페이징처리 끝 -->
         <a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
     </div>
     <!--/*
@@ -53,5 +72,8 @@ layout:fragment="content" : 부모 템플릿의 위 부분을 자식 템플릿�
 
         [[${question.subject}]]
         [[${question.createDate}]]
+
+        4. th:classappend="조건식 ? 클래스값" 속성은 조건식이 참인 경우 클래스값을 class 속성에 추가한다.
+        5. #numbers.sequence(시작, 끝)은 시작 번호부터 끝 번호까지의 루프를 만들어 내는 타임리프의 유틸리티이다.
     */-->
 </html>

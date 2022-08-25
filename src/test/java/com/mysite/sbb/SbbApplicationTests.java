@@ -1,20 +1,11 @@
 package com.mysite.sbb;
 
-import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
-import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // @SpringBootTest : 스프링부트 테스트 클래스임을 의미
 @SpringBootTest
@@ -28,8 +19,11 @@ class SbbApplicationTests {
     @Autowired
     private AnswerRepository answerRepository;
 
+    @Autowired
+    private QuestionService questionService;
+
     // @Transactional : 메서드가 종료될 때까지 DB 세션이 유지된다.
-    @Transactional
+    //@Transactional // 주의사항 : 해당 어노테이션을 붙이면 DB 세션은 유지되나 rollback 됨
     @Test
     void testJpa() {
         /**
@@ -146,6 +140,16 @@ class SbbApplicationTests {
 
         assertEquals(1, answerList.size());
         assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
+        */
+        /**
+         * 3-02 페이징 : 대량 테스트 데이터 만들기
+         */
+        /*
+        for (int i = 0; i <= 300; i++) {
+            String subject = String.format("테스트 데이터입니다.:[%03d]", i);
+            String content = "내용무";
+            this.questionService.create(subject, content);
+        }
         */
     }
 
