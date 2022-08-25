@@ -32,6 +32,8 @@ dependencies {
     // 타임리프(Thymeleaf)
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    // Spring Boot Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation:'
 }
 
 tasks.named('test') {
