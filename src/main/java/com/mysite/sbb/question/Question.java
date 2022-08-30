@@ -11,11 +11,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -43,4 +44,8 @@ public class Question {
     private SiteUser author;
 
     private LocalDateTime modifyDate;
+
+    // List가 아닌 Set으로 한 이유는 추천인은 중복되면 안되기 때문이다.
+    @ManyToMany
+    Set<SiteUser> voter;
 }
